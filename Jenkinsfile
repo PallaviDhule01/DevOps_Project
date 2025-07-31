@@ -1,30 +1,14 @@
-CODE_CHANGES = true
 pipeline {
     agent any
+
+    parameters {
+        string(name: 'GREETING_NAME', defaultValue: 'Pallavi', description: 'pallavi Dhule')
+    }
+
     stages {
-        stage('build') {
-            when {
-                expression {
-                    BRANCH_NAME == 'master' && CODE_CHANGES == true
-                }
-            }
+        stage('Greet from Main') {
             steps {
-                echo 'building the application...'
-            }
-        }
-        stage('test') {
-            when {
-                expression {
-                    BRANCH_NAME == 'development'
-                }
-            }
-            steps {
-                echo 'testing the application...'
-            }
-        }
-        stage('deploy') {
-            steps {
-                echo 'deploying the application...'
+                echo "Hello from MASTER branch, ${params.GREETING_NAME}!"
             }
         }
     }
